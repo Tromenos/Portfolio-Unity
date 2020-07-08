@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     {
         if (cam == null || rb == null)
             this.enabled = false;
-
+        
         // Cursor.lockState = CursorLockMode.Locked;
     }
 
