@@ -25,11 +25,11 @@ public struct Grid
 
     public Vector3Int PositionToIndex(Vector3 position)
     {
-        position += origin;
+        position -= origin;
 
-        int x = Mathf.FloorToInt(position.x / cellSize.x);
-        int y = Mathf.FloorToInt(position.y / cellSize.y);
-        int z = Mathf.FloorToInt(position.z / cellSize.z);
+        int x = Mathf.FloorToInt((position.x / cellSize.x));
+        int y = Mathf.FloorToInt((position.y / cellSize.y));
+        int z = Mathf.FloorToInt((position.z / cellSize.z));
 
         return new Vector3Int(x, y, z);
     }
@@ -76,9 +76,10 @@ public struct Grid
         return pos;
     }
 
-    public Vector3Int MaxIndex(Vector3Int size)
+    public Vector3Int MaxIndex(Vector3Int count)
     {
-        var trueSize = new Vector3(cellSize.x * size.x, cellSize.y * size.y, cellSize.z * size.z);
-        return PositionToIndex(origin + trueSize);
+        count -= Vector3Int.one;
+        var maxPos = new Vector3((cellSize.x * count.x), (cellSize.y * count.y), (cellSize.z * count.z)) + origin;
+        return PositionToIndex(maxPos);
     }
 }
